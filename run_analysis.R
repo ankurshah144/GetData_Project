@@ -27,12 +27,12 @@ subjects_test <- read.table("./UCI HAR Dataset/test/subject_test.txt", col.names
 subjects_train <- read.table("./UCI HAR Dataset/train/subject_train.txt", col.names=c("Subject"))
 # subjects <- rbind(subjects, subjects_train)  # Combine training and test subjects
 
-test <- read.table("./UCI HAR Dataset/test/X_test.txt")  # read test data
+if(!exists("test")) test <- read.table("./UCI HAR Dataset/test/X_test.txt")  # read test data
 test_a <- read.table("./UCI HAR Dataset/test/Y_test.txt", col.names=c("Activity"))  # test activities
 test <- cbind(test_a, test)  # column bind with activity numbers at the beginning
 test <- cbind(subjects_test, test)  # column bind with subjects at the beginning
 
-train <- read.table("./UCI HAR Dataset/train/X_train.txt")  # read training data
+if(!exists("train")) train <- read.table("./UCI HAR Dataset/train/X_train.txt")  # read training data
 train_a <- read.table("./UCI HAR Dataset/train/Y_train.txt", col.names=c("Activity"))  # training
 train <- cbind(train_a, train)  # column bind with activity numbers at the beginning
 train <- cbind(subjects_train, train)  # column bind with subjects at the beginning
@@ -84,5 +84,5 @@ tidydata <- aggregate(x = tidy1[ , 4:69]
 
 ## 5. Save the independent tidy data set created above, to a file
 ## Please note that this file can be read with the following command:
-##    read.table("test.txt", header = TRUE)
-write.table(tidydata, "GetnCleanDataProject.txt", quote = FALSE, sep = "\t", row.names = FALSE)
+##    read.table("GetAndCleanDataProject.txt", header = TRUE)
+write.table(tidydata, "GetAndCleanDataProject.txt", quote = FALSE, sep = "\t", row.names = FALSE)
